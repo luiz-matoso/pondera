@@ -13,3 +13,11 @@ body {
 .login-form-bg {
   background-color: #181818;
 }
+
+.custom-header {
+  background-color: #141414;
+}
+
+.custom-bg-sidebar {
+  background-color: #0e0e0e;
+}

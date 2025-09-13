@@ -3,7 +3,7 @@ import Login from "./pages/Login/Login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Register from "./pages/Register/Register";
 import { Bounce, ToastContainer } from "react-toastify";
-import Header from "./components/Header/Header";
+import Layout from "./components/Layout/Layout";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
             path="/"
             element={
               <>
-                <Header />
+                <Layout />
               </>
             }
           />

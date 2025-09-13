@@ -17,7 +17,7 @@ const Header = () => {
   };
 
   return (
-    <nav className="login-form-bg shadow-lg text-white h-20">
+    <nav className="custom-header text-white h-20">
       <div className="container mx-auto px-40 flex justify-between items-center h-full">
         <div className="flex items-center space-x-8 h-full">
           <div className="flex items-center space-x-6">
