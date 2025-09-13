@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import logo from "../../assets/logo_pondera.png";
 
-import { MdOutlineEmail } from "react-icons/md";
-import { CiLock } from "react-icons/ci";
 import { IoPersonSharp } from "react-icons/io5";
 import { TbCircleLetterUFilled } from "react-icons/tb";
 import { FaApple, FaGoogle, FaXTwitter } from "react-icons/fa6";
@@ -53,7 +51,7 @@ const Register = () => {
     <div className="flex h-screen items-center justify-center">
       <div className="py-8 px-12 max-w-md w-full login-form-bg rounded-2xl shadow-inner shadow-neutral-700 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-l from-[#06b6d4] via-[#2563eb] to-[#6366f1] rounded-t-2xl"></div>
-        <div className="flex items-center justify-center ">
+        <div className="flex items-center justify-center mb-5 mt-5">
           <img
             src={logo}
             className="w-20 bg-neutral-800 rounded-2xl shadow-inner shadow-neutral-700 cursor-pointer"
@@ -66,7 +64,7 @@ const Register = () => {
         </h1>
         <p className="mt-2 text-zinc-400 text-center">
           Already have an account?{" "}
-          <Link className="text-white" to="/signin">
+          <Link className="text-white" to="/login">
             Sign In
           </Link>
         </p>

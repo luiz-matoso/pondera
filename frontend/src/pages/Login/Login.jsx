@@ -9,7 +9,8 @@ import { Link } from "react-router-dom";
 const Login = () => {
   return (
     <div className="flex h-screen items-center justify-center">
-      <div className="py-8 px-12 max-w-md w-full login-form-bg rounded-2xl shadow-inner shadow-neutral-800">
+      <div className="py-8 px-12 max-w-md w-full login-form-bg rounded-2xl shadow-inner shadow-neutral-700 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-l from-[#06b6d4] via-[#2563eb] to-[#6366f1] rounded-t-2xl"></div>
         <div className="flex items-center justify-center mb-5 mt-5 ">
           <img
             src={logo}
@@ -23,7 +24,7 @@ const Login = () => {
         </h1>
         <p className="mt-2 text-zinc-400 text-center">
           Don't have an account yet?{" "}
-          <Link className="text-white" to="/signup">
+          <Link className="text-white" to="/register">
             Sign Up
           </Link>
         </p>
@@ -35,7 +36,7 @@ const Login = () => {
               <input
                 className="bg-neutral-950 p-2 w-full rounded-md text-neutral-300 w-full pl-8 animation-colors"
                 type="text"
-                placeholder="email address"
+                placeholder="Your email address..."
               />
               <MdOutlineEmail className="absolute left-2 top-1/2 transform -translate-y-1/2 text-neutral-400" />
             </div>
@@ -45,7 +46,7 @@ const Login = () => {
               <input
                 className="bg-neutral-950 p-2 w-full rounded-md text-neutral-300 w-full pl-8"
                 type="text"
-                placeholder="password"
+                placeholder="Your password..."
               />
               <CiLock className="absolute left-2 top-1/2 transform -translate-y-1/2 text-neutral-400" />
             </div>
