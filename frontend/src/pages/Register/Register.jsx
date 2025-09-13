@@ -52,11 +52,13 @@ const Register = () => {
       <div className="py-8 px-12 max-w-md w-full login-form-bg rounded-2xl shadow-inner shadow-neutral-700 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-l from-[#06b6d4] via-[#2563eb] to-[#6366f1] rounded-t-2xl"></div>
         <div className="flex items-center justify-center mb-5 mt-5">
-          <img
-            src={logo}
-            className="w-20 bg-neutral-900 rounded-2xl shadow-inner shadow-neutral-700 cursor-pointer"
-            alt=""
-          />
+          <Link to="/">
+            <img
+              src={logo}
+              className="w-20 bg-neutral-900 rounded-2xl shadow-inner shadow-neutral-700 cursor-pointer"
+              alt=""
+            />
+          </Link>
         </div>
 
         <h1 className="text-white font-semibold text-center text-2xl">
