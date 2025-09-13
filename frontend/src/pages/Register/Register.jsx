@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../assets/logo_pondera.png";
 
 import { MdOutlineEmail } from "react-icons/md";
@@ -10,8 +10,37 @@ import { BsCalendar2DateFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { FaLock } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { registerUser } from "./../../services/authentication";
 
 const Register = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    username: "",
+    birthdate: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (formData.password !== formData.confirmPassword) {
+      console.log("As senhas não coincidem!");
+      return;
+    }
+
+    try {
+      await registerUser(formData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="flex h-screen items-center justify-center">
       <div className="py-8 px-12 max-w-md w-full login-form-bg rounded-2xl shadow-inner shadow-neutral-800">
@@ -33,14 +62,18 @@ const Register = () => {
           </Link>
         </p>
 
-        <form action="">
+        <form onSubmit={handleSubmit}>
           <div className="flex mt-10 flex-col gap-4">
             {/* Name */}
             <div className="relative">
               <input
-                className="bg-neutral-950 p-2 w-full rounded-md text-neutral-400 w-full pl-8 animation-colors "
+                className="bg-neutral-950 p-2 w-full rounded-md text-neutral-300 w-full pl-8 animation-colors "
                 type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
                 placeholder="Your name..."
+                required
               />
               <IoPersonSharp className="absolute left-2 top-1/2 transform -translate-y-1/2 text-neutral-400" />
             </div>
@@ -50,7 +83,11 @@ const Register = () => {
               <input
                 className="bg-neutral-950 p-2 w-full rounded-md text-neutral-300 w-full pl-8 animation-colors"
                 type="text"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
                 placeholder="Your username..."
+                required
               />
               <TbCircleLetterUFilled className="absolute left-2 top-1/2 transform -translate-y-1/2 text-neutral-400" />
             </div>
@@ -59,8 +96,12 @@ const Register = () => {
             <div className="relative">
               <input
                 className="bg-neutral-950 p-2 w-full rounded-md text-neutral-300 w-full pl-8 animation-colors"
-                type="text"
+                type="date"
+                name="birthdate"
+                value={formData.birthdate}
+                onChange={handleChange}
                 placeholder="Your birth date..."
+                required
               />
               <BsCalendar2DateFill className="absolute left-2 top-1/2 transform -translate-y-1/2 text-neutral-400" />
             </div>
@@ -70,7 +111,11 @@ const Register = () => {
               <input
                 className="bg-neutral-950 p-2 w-full rounded-md text-neutral-300 w-full pl-8 animation-colors"
                 type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 placeholder="Your email address..."
+                required
               />
               <MdEmail className="absolute left-2 top-1/2 transform -translate-y-1/2 text-neutral-400" />
             </div>
@@ -80,7 +125,11 @@ const Register = () => {
               <input
                 className="bg-neutral-950 p-2 w-full rounded-md text-neutral-300 w-full pl-8"
                 type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
                 placeholder="Your password..."
+                required
               />
               <FaLock className="absolute left-2 top-1/2 transform -translate-y-1/2 text-neutral-400" />
             </div>
@@ -90,16 +139,22 @@ const Register = () => {
               <input
                 className="bg-neutral-950 p-2 w-full rounded-md text-neutral-300 w-full pl-8"
                 type="password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
                 placeholder="Confirm your password..."
+                required
               />
               <FaLock className="absolute left-2 top-1/2 transform -translate-y-1/2 text-neutral-400" />
             </div>
           </div>
+          <button
+            type="submit"
+            className="p-2 mt-6 w-full text-white bg-blue-500 rounded-xl cursor-pointer transition-colors hover:bg-blue-600"
+          >
+            Register
+          </button>
         </form>
-
-        <button className="p-2 mt-6 w-full text-white bg-blue-500 rounded-xl cursor-pointer transition-colors hover:bg-blue-600">
-          Register
-        </button>
 
         <div className="flex items-center my-4">
           <hr className="flex-grow border-neutral-700" />
