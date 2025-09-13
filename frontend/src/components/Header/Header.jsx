@@ -17,7 +17,7 @@ const Header = () => {
   };
 
   return (
-    <nav className="custom-header text-white h-20">
+    <nav className="custom-header text-white p-6">
       <div className="container mx-auto px-40 flex justify-between items-center h-full">
         <div className="flex items-center space-x-8 h-full">
           <div className="flex items-center space-x-6">
@@ -31,7 +31,7 @@ const Header = () => {
             </p>
           </div>
 
-          <div className="h-full w-px bg-zinc-800"></div>
+          <div className="h-5 w-px bg-zinc-800"></div>
 
           <div className="flex items-center space-x-8">
             <Link
@@ -65,7 +65,7 @@ const Header = () => {
             <FaSearch className="cursor-pointer" />
           </div>
 
-          <div className="h-full w-px bg-zinc-800"></div>
+          <div className="h-5 w-px bg-zinc-800"></div>
 
           {isLoggedIn ? (
             <div className="flex items-center space-x-4">
@@ -106,7 +106,7 @@ const Header = () => {
             </div>
           )}
 
-          <div className="h-full w-px bg-zinc-800"></div>
+          <div className="h-5 w-px bg-zinc-800"></div>
         </div>
       </div>
     </nav>
