@@ -9,10 +9,12 @@ import { FaApple, FaGoogle, FaXTwitter } from "react-icons/fa6";
 import { BsCalendar2DateFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { FaLock } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "./../../services/authentication";
+import { toast } from "react-toastify";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     username: "",
@@ -30,21 +32,28 @@ const Register = () => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      console.log("As senhas não coincidem!");
+      toast.error("Passwords do not match.");
       return;
     }
 
     try {
       await registerUser(formData);
+      toast.success("Your account was successfully created.");
+      setTimeout(() => {
+        navigate("/signin");
+      }, 1000);
     } catch (err) {
-      console.log(err);
+      const errorMessage =
+        err.response?.data?.error || "An error occurred. Try Again.";
+      toast.error(errorMessage);
     }
   };
 
   return (
     <div className="flex h-screen items-center justify-center">
-      <div className="py-8 px-12 max-w-md w-full login-form-bg rounded-2xl shadow-inner shadow-neutral-800">
-        <div className="flex items-center justify-center mb-5 mt-5 ">
+      <div className="py-8 px-12 max-w-md w-full login-form-bg rounded-2xl shadow-inner shadow-neutral-700 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-l from-[#06b6d4] via-[#2563eb] to-[#6366f1] rounded-t-2xl"></div>
+        <div className="flex items-center justify-center ">
           <img
             src={logo}
             className="w-20 bg-neutral-800 rounded-2xl shadow-inner shadow-neutral-700 cursor-pointer"

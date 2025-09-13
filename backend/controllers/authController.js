@@ -20,8 +20,22 @@ export const register = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
+    if (error.errno === 1062) {
+      if (error.sqlMessage.includes("email")) {
+        return res
+          .status(409)
+          .json({ error: "This email is already registered." });
+      } else if (error.sqlMessage.includes("username")) {
+        return res
+          .status(409)
+          .json({ error: "This username is already taken." });
+      }
+      return res
+        .status(409)
+        .json({ error: "This email or username is already in use." });
+    }
     return res
       .status(500)
-      .json({ error: "ERROR: Account wasn't successfully created" });
+      .json({ error: "An error occurred. Please try again." });
   }
 };

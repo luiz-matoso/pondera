@@ -7,6 +7,6 @@ export const registerUser = async (formData) => {
     const response = await axios.post(`${API_URL}/register`, formData);
     return response.data;
   } catch (error) {
-    throw error.response?.data?.error || "An error occurred. Try again.";
+    throw error;
   }
 };
