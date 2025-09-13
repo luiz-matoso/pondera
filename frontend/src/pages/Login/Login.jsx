@@ -42,7 +42,7 @@ const Login = () => {
         <div className="flex items-center justify-center mb-5 mt-5 ">
           <img
             src={logo}
-            className="w-20 bg-neutral-800 rounded-2xl shadow-inner shadow-neutral-700 cursor-pointer"
+            className="w-20 bg-neutral-900 rounded-2xl shadow-inner shadow-neutral-700 cursor-pointer"
             alt=""
           />
         </div>
@@ -62,7 +62,7 @@ const Login = () => {
             {/* Email */}
             <div className="relative">
               <input
-                className="bg-neutral-950 p-2 w-full rounded-md text-neutral-300 w-full pl-8 animation-colors"
+                className="bg-neutral-950 p-2 w-full rounded-md text-neutral-300 w-full pl-8 border border-neutral-800 animation-colors"
                 type="email"
                 name="email"
                 value={formData.email}
@@ -76,7 +76,7 @@ const Login = () => {
             {/* Password */}
             <div className="relative">
               <input
-                className="bg-neutral-950 p-2 w-full rounded-md text-neutral-300 w-full pl-8"
+                className="bg-neutral-950 p-2 w-full rounded-md text-neutral-300 w-full pl-8 border border-neutral-800"
                 type="password"
                 name="password"
                 value={formData.password}
@@ -103,15 +103,15 @@ const Login = () => {
 
         <div className="flex justify-center gap-4 ">
           {/* Apple */}
-          <button className="flex justify-center items-center w-full cursor-pointer p-3 bg-neutral-800 rounded-md border border-neutral-700 hover:bg-neutral-700 transition-colors">
+          <button className="flex justify-center items-center w-full cursor-pointer p-3 bg-neutral-900 rounded-md border border-neutral-800 shadow-lg shadow-black hover:bg-neutral-800 transition-colors">
             <FaApple className="text-white" size={24} />
           </button>
           {/* Google */}
-          <button className="flex justify-center items-center w-full p-3 cursor-pointer bg-neutral-800 rounded-md border border-neutral-700 hover:bg-neutral-700 transition-colors">
+          <button className="flex justify-center items-center w-full p-3 cursor-pointer bg-neutral-900 rounded-md border border-neutral-800 shadow-lg shadow-black hover:bg-neutral-800 transition-colors">
             <FaGoogle className="text-white" size={24} />
           </button>
           {/* Twitter */}
-          <button className="flex justify-center items-center w-full p-3 cursor-pointer bg-neutral-800 rounded-md border border-neutral-700 hover:bg-neutral-700 transition-colors">
+          <button className="flex justify-center items-center w-full p-3 cursor-pointer bg-neutral-900 rounded-md border border-neutral-800 shadow-lg shadow-black hover:bg-neutral-800 transition-colors">
             <FaXTwitter className="text-white" size={24} />
           </button>
         </div>
