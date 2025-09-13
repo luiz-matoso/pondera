@@ -1,4 +1,5 @@
 import { db } from "../db.js";
+import bcrypt from "bcrypt";
 
 export const register = async (req, res) => {
   const { name, username, birthdate, email, password } = req.body;
@@ -9,9 +10,12 @@ export const register = async (req, res) => {
     });
   }
 
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
+
   const q =
     "INSERT INTO users (`name`, `username`, `birthdate`, `email`, `password`) VALUES (?, ?, ?, ?, ?)";
-  const values = [name, username, birthdate, email, password];
+  const values = [name, username, birthdate, email, hashedPassword];
 
   try {
     await db.query(q, values);
@@ -34,6 +38,43 @@ export const register = async (req, res) => {
         .status(409)
         .json({ error: "This email or username is already in use." });
     }
+    return res
+      .status(500)
+      .json({ error: "An error occurred. Please try again." });
+  }
+};
+
+export const login = async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ error: "Email and password are required." });
+  }
+
+  const q = "SELECT * FROM users WHERE email = ?";
+  const values = [email];
+
+  try {
+    const [rows] = await db.query(q, values);
+
+    if (rows.length === 0) {
+      return res.status(401).json({ error: "Invalid email or password." });
+    }
+
+    const user = rows[0];
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (passwordMatch) {
+      return res.status(200).json({
+        message: "Login successful!",
+        user: { id: user.id, username: user.username },
+      });
+    } else {
+      return res.status(401).json({ error: "Invalid email or password." });
+    }
+  } catch (error) {
+    console.error(error);
     return res
       .status(500)
       .json({ error: "An error occurred. Please try again." });

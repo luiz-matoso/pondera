@@ -38,7 +38,7 @@ const Register = () => {
       await registerUser(formData);
       toast.success("Your account was successfully created.");
       setTimeout(() => {
-        navigate("/signin");
+        navigate("/login");
       }, 1000);
     } catch (err) {
       const errorMessage =
