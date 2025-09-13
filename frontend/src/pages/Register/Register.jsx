@@ -3,7 +3,12 @@ import logo from "../../assets/logo_pondera.png";
 
 import { MdOutlineEmail } from "react-icons/md";
 import { CiLock } from "react-icons/ci";
+import { IoPersonSharp } from "react-icons/io5";
+import { TbCircleLetterUFilled } from "react-icons/tb";
 import { FaApple, FaGoogle, FaXTwitter } from "react-icons/fa6";
+import { BsCalendar2DateFill } from "react-icons/bs";
+import { MdEmail } from "react-icons/md";
+import { FaLock } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Register = () => {
@@ -19,7 +24,7 @@ const Register = () => {
         </div>
 
         <h1 className="text-white font-semibold text-center text-2xl">
-          Create your Account
+          Create Your Account
         </h1>
         <p className="mt-2 text-zinc-400 text-center">
           Already have an account?{" "}
@@ -33,31 +38,61 @@ const Register = () => {
             {/* Name */}
             <div className="relative">
               <input
+                className="bg-neutral-950 p-2 w-full rounded-md text-neutral-400 w-full pl-8 animation-colors "
+                type="text"
+                placeholder="Your name..."
+              />
+              <IoPersonSharp className="absolute left-2 top-1/2 transform -translate-y-1/2 text-neutral-400" />
+            </div>
+
+            {/* Username */}
+            <div className="relative">
+              <input
                 className="bg-neutral-950 p-2 w-full rounded-md text-neutral-300 w-full pl-8 animation-colors"
                 type="text"
-                placeholder="full name"
+                placeholder="Your username..."
               />
-              <MdOutlineEmail className="absolute left-2 top-1/2 transform -translate-y-1/2 text-neutral-400" />
+              <TbCircleLetterUFilled className="absolute left-2 top-1/2 transform -translate-y-1/2 text-neutral-400" />
+            </div>
+
+            {/* Birth Date */}
+            <div className="relative">
+              <input
+                className="bg-neutral-950 p-2 w-full rounded-md text-neutral-300 w-full pl-8 animation-colors"
+                type="text"
+                placeholder="Your birth date..."
+              />
+              <BsCalendar2DateFill className="absolute left-2 top-1/2 transform -translate-y-1/2 text-neutral-400" />
             </div>
 
             {/* Email */}
             <div className="relative">
               <input
                 className="bg-neutral-950 p-2 w-full rounded-md text-neutral-300 w-full pl-8 animation-colors"
-                type="text"
-                placeholder="email address"
+                type="email"
+                placeholder="Your email address..."
               />
-              <MdOutlineEmail className="absolute left-2 top-1/2 transform -translate-y-1/2 text-neutral-400" />
+              <MdEmail className="absolute left-2 top-1/2 transform -translate-y-1/2 text-neutral-400" />
             </div>
 
             {/* Password */}
             <div className="relative">
               <input
                 className="bg-neutral-950 p-2 w-full rounded-md text-neutral-300 w-full pl-8"
-                type="text"
-                placeholder="password"
+                type="password"
+                placeholder="Your password..."
               />
-              <CiLock className="absolute left-2 top-1/2 transform -translate-y-1/2 text-neutral-400" />
+              <FaLock className="absolute left-2 top-1/2 transform -translate-y-1/2 text-neutral-400" />
+            </div>
+
+            {/* Conf Password */}
+            <div className="relative">
+              <input
+                className="bg-neutral-950 p-2 w-full rounded-md text-neutral-300 w-full pl-8"
+                type="password"
+                placeholder="Confirm your password..."
+              />
+              <FaLock className="absolute left-2 top-1/2 transform -translate-y-1/2 text-neutral-400" />
             </div>
           </div>
         </form>
