@@ -37,8 +37,7 @@ const Login = () => {
 
   return (
     <div className="flex h-screen items-center justify-center">
-      <div className="py-8 px-12 max-w-md w-full login-form-bg rounded-2xl shadow-inner shadow-neutral-700 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-l from-[#06b6d4] via-[#2563eb] to-[#6366f1] rounded-t-2xl"></div>
+      <div className="py-8 px-12 max-w-md w-full login-form-bg rounded-2xl border-t border-neutral-600 relative overflow-hidden">
         <div className="flex items-center justify-center mb-5 mt-5 ">
           <Link to="/">
             <img
@@ -105,15 +104,15 @@ const Login = () => {
 
         <div className="flex justify-center gap-4 ">
           {/* Apple */}
-          <button className="flex justify-center items-center w-full cursor-pointer p-3 bg-neutral-900 rounded-md border border-neutral-800 shadow-lg shadow-black hover:bg-neutral-800 transition-colors">
+          <button className="flex justify-center items-center w-full cursor-pointer p-3 bg-neutral-900 rounded-md border-t border-neutral-600 shadow-lg shadow-black hover:bg-neutral-800 transition-colors">
             <FaApple className="text-white" size={24} />
           </button>
           {/* Google */}
-          <button className="flex justify-center items-center w-full p-3 cursor-pointer bg-neutral-900 rounded-md border border-neutral-800 shadow-lg shadow-black hover:bg-neutral-800 transition-colors">
+          <button className="flex justify-center items-center w-full p-3 cursor-pointer bg-neutral-900 rounded-md border-t border-neutral-600 shadow-lg shadow-black hover:bg-neutral-800 transition-colors">
             <FaGoogle className="text-white" size={24} />
           </button>
           {/* Twitter */}
-          <button className="flex justify-center items-center w-full p-3 cursor-pointer bg-neutral-900 rounded-md border border-neutral-800 shadow-lg shadow-black hover:bg-neutral-800 transition-colors">
+          <button className="flex justify-center items-center w-full p-3 cursor-pointer bg-neutral-900 rounded-md border-t border-neutral-600 shadow-lg shadow-black hover:bg-neutral-800 transition-colors">
             <FaXTwitter className="text-white" size={24} />
           </button>
         </div>

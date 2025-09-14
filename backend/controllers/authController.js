@@ -77,10 +77,14 @@ export const login = async (req, res) => {
           expiresIn: "7d",
         }
       );
+
+      // Retornar TODOS os dados do usuário (exceto a senha)
+      const { password: _, ...userData } = user;
+
       return res.status(200).json({
         message: "Login successful!",
         token,
-        user: { id: user.id, username: user.username },
+        user: userData, // Agora retorna todos os dados do usuário
       });
     } else {
       return res.status(401).json({ error: "Invalid email or password." });

@@ -10,8 +10,9 @@ const HomeQuestions = () => {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [currentUser] = useState(getCurrentUser());
   const navigate = useNavigate();
+
+  const currentUser = getCurrentUser();
 
   useEffect(() => {
     fetchQuestions();

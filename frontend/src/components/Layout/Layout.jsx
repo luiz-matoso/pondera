@@ -7,7 +7,6 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 
 const Layout = () => {
   const location = useLocation();
-  const [activeTab, setActiveTab] = useState("home");
 
   const menuItems = [
     { id: "home", icon: MdHome, label: "Home", path: "/" },
