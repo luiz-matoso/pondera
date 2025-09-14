@@ -12,14 +12,30 @@ export const registerUser = async (formData) => {
 };
 
 export const loginUser = async (formData) => {
-  const response = await axios.post(`${API_URL}/login`, formData);
+  try {
+    const response = await axios.post(`${API_URL}/login`, formData, {
+      validateStatus: function (status) {
+        return true;
+      },
+    });
 
-  if (response.data.token) {
-    localStorage.setItem("token", response.data.token);
-    localStorage.setItem("user", JSON.stringify(response.data.user));
+    if (response.status >= 200 && response.status < 300) {
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+      }
+      return response.data;
+    } else {
+      throw {
+        response: {
+          data: response.data,
+        },
+      };
+    }
+  } catch (error) {
+    console.error("Login error:", error);
+    throw error;
   }
-
-  return response.data;
 };
 
 export const logoutUser = () => {
