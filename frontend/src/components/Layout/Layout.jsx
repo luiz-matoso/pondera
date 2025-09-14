@@ -2,11 +2,15 @@ import Header from "./../Header/Header";
 import { MdHome } from "react-icons/md";
 import { RiProfileFill } from "react-icons/ri";
 import { IoHelpBuoySharp } from "react-icons/io5";
-import { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
+import { useState } from "react";
+import AskQuestionModal from "../AskQuestionModal/AskQuestionModal";
+import { isAuthenticated } from "../../services/authentication";
+import { toast } from "react-toastify";
 
 const Layout = () => {
   const location = useLocation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const menuItems = [
     { id: "home", icon: MdHome, label: "Home", path: "/" },
@@ -18,6 +22,20 @@ const Layout = () => {
     },
     { id: "help", icon: IoHelpBuoySharp, label: "Help", path: "/help" },
   ];
+
+  const handleAskQuestionClick = () => {
+    if (!isAuthenticated()) {
+      toast.error("Please login to ask a question");
+      return;
+    }
+    setIsModalOpen(true);
+  };
+
+  const handleQuestionCreated = () => {
+    setIsModalOpen(false);
+
+    window.location.reload();
+  };
 
   return (
     <div>
@@ -37,7 +55,6 @@ const Layout = () => {
                     <Link
                       key={item.id}
                       to={item.path}
-                      onClick={() => setActiveTab(item.id)}
                       className={`p-3 rounded cursor-pointer transition-colors text-left flex items-center ${
                         active
                           ? "text-blue-500"
@@ -45,7 +62,7 @@ const Layout = () => {
                       }`}
                     >
                       <Icon className="mr-3" />
-                      <span className={`cursor-pointer`}>{item.label}</span>
+                      <span className="cursor-pointer">{item.label}</span>
                     </Link>
                   );
                 })}
@@ -63,7 +80,18 @@ const Layout = () => {
           <div className="custom-bg-sidebar h-[calc(100vh-5rem)] p-6 border-r border-gray-800">
             <div className="space-y-2">
               <div className="p-3 text-center rounded transition-colors">
-                <button className="text-white bg-blue-500 px-20 py-3 cursor-pointer rounded-sm font-black">
+                <button
+                  onClick={handleAskQuestionClick}
+                  className={`px-20 py-3 rounded-sm font-black transition-colors ${
+                    isAuthenticated()
+                      ? "text-white bg-blue-500 cursor-pointer hover:bg-blue-600"
+                      : "text-gray-400 bg-blue-500 bg-opacity-50 cursor-not-allowed"
+                  }`}
+                  disabled={!isAuthenticated()}
+                  title={
+                    !isAuthenticated() ? "Please login to ask a question" : ""
+                  }
+                >
                   Ask A Question
                 </button>
               </div>
@@ -71,6 +99,12 @@ const Layout = () => {
           </div>
         </div>
       </div>
+
+      <AskQuestionModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onQuestionCreated={handleQuestionCreated}
+      />
     </div>
   );
 };

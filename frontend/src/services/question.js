@@ -48,7 +48,6 @@ export const questionService = {
       const response = await axios.post(API_URL, questionData, {
         headers: getAuthHeaders(),
       });
-      toast.success("Question created successfully!");
       return response.data;
     } catch (error) {
       return handleError(error, "Failed to create question");
