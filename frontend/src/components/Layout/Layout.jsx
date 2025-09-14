@@ -2,30 +2,17 @@ import Header from "./../Header/Header";
 import { MdHome } from "react-icons/md";
 import { RiProfileFill } from "react-icons/ri";
 import { IoHelpBuoySharp } from "react-icons/io5";
-import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
+import { Outlet } from "react-router-dom";
 
-const Layout = ({ children }) => {
+const Layout = () => {
   const [activeTab, setActiveTab] = useState("home");
 
   const menuItems = [
-    { id: "home", icon: MdHome, label: "Home", component: HomeContent },
-    {
-      id: "profile",
-      icon: RiProfileFill,
-      label: "My Profile",
-      component: ProfileContent,
-    },
-    {
-      id: "help",
-      icon: IoHelpBuoySharp,
-      label: "Help",
-      component: HelpContent,
-    },
+    { id: "home", icon: MdHome, label: "Home" },
+    { id: "profile", icon: RiProfileFill, label: "My Profile" },
+    { id: "help", icon: IoHelpBuoySharp, label: "Help" },
   ];
-
-  const ActiveComponent =
-    menuItems.find((item) => item.id === activeTab)?.component || HomeContent;
 
   return (
     <div>
@@ -62,7 +49,7 @@ const Layout = ({ children }) => {
         </div>
 
         <div className="w-2/4 bg-[#0f0f0f] p-6">
-          <ActiveComponent />
+          <Outlet />
         </div>
 
         {/* Sidebar Direita */}

@@ -4,23 +4,23 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Register from "./pages/Register/Register";
 import { Bounce, ToastContainer } from "react-toastify";
 import Layout from "./components/Layout/Layout";
+import HomeQuestions from "./components/HomeQuestions/HomeQuestions";
+import QuestionDetail from "./components/QuestionDetail/QuestionDetail";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Layout />
-              </>
-            }
-          />
+          <Route path="/" element={<Layout />}>
+            <Route index element={<HomeQuestions />} />
+            <Route path="question/:id" element={<QuestionDetail />} />
+          </Route>
+
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
+
         <ToastContainer
           position="top-right"
           autoClose={5000}
