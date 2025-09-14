@@ -244,3 +244,14 @@ export const addAnswer = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+export const getCategories = async (req, res) => {
+  try {
+    const query = "SELECT * FROM categories ORDER BY name";
+    const [categories] = await db.query(query);
+    res.json(categories);
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};

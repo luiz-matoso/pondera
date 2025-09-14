@@ -7,11 +7,13 @@ import {
   dislikeQuestion,
   deleteQuestion,
   addAnswer,
+  getCategories,
 } from "../controllers/questionController.js";
 
 const router = express.Router();
 
 router.get("/", getQuestions);
+router.get("/categories", getCategories);
 router.get("/:id", getQuestionById);
 router.post("/", createQuestion);
 router.post("/:id/like", likeQuestion);

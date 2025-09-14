@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaTimes, FaPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { questionService } from "../../services/question";
@@ -8,22 +8,44 @@ const AskQuestionModal = ({ isOpen, onClose, onQuestionCreated }) => {
   const [formData, setFormData] = useState({
     title: "",
     content: "",
-    category: "general",
+    category: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [loadingCategories, setLoadingCategories] = useState(true);
 
-  const categories = [
-    "general",
-    "technology",
-    "science",
-    "arts",
-    "sports",
-    "politics",
-    "health",
-    "education",
-    "entertainment",
-    "business",
-  ];
+  // Buscar categorias do banco de dados
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const categoriesData = await questionService.getCategories();
+        setCategories(categoriesData);
+
+        // Setar a primeira categoria como padrão se existir
+        if (categoriesData.length > 0 && !formData.category) {
+          setFormData((prev) => ({
+            ...prev,
+            category: categoriesData[0].id.toString(),
+          }));
+        }
+      } catch (error) {
+        console.error("Error loading categories:", error);
+        toast.error("Failed to load categories");
+        // Categorias padrão de fallback
+        setCategories([
+          { id: 1, name: "General" },
+          { id: 2, name: "Technology" },
+          { id: 3, name: "Science" },
+        ]);
+      } finally {
+        setLoadingCategories(false);
+      }
+    };
+
+    if (isOpen) {
+      fetchCategories();
+    }
+  }, [isOpen]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,15 +69,24 @@ const AskQuestionModal = ({ isOpen, onClose, onQuestionCreated }) => {
         return;
       }
 
-      if (!formData.title.trim() || !formData.content.trim()) {
+      if (
+        !formData.title.trim() ||
+        !formData.content.trim() ||
+        !formData.category
+      ) {
         toast.error("Please fill in all required fields");
         return;
       }
 
+      // Encontrar o nome da categoria baseado no ID
+      const selectedCategory = categories.find(
+        (cat) => cat.id.toString() === formData.category
+      );
+
       const questionData = {
         title: formData.title.trim(),
         content: formData.content.trim(),
-        category: formData.category,
+        category: selectedCategory ? selectedCategory.name : formData.category,
         user_id: user.id,
       };
 
@@ -66,7 +97,7 @@ const AskQuestionModal = ({ isOpen, onClose, onQuestionCreated }) => {
         setFormData({
           title: "",
           content: "",
-          category: "general",
+          category: categories.length > 0 ? categories[0].id.toString() : "",
         });
         onQuestionCreated?.();
         onClose();
@@ -127,19 +158,26 @@ const AskQuestionModal = ({ isOpen, onClose, onQuestionCreated }) => {
               <label className="block text-sm font-medium text-gray-400 mb-2">
                 Category *
               </label>
-              <select
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-                className="w-full bg-neutral-800 border border-neutral-700 rounded-md px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                disabled={isSubmitting}
-              >
-                {categories.map((category) => (
-                  <option key={category} value={category}>
-                    {category.charAt(0).toUpperCase() + category.slice(1)}
-                  </option>
-                ))}
-              </select>
+              {loadingCategories ? (
+                <div className="w-full bg-neutral-800 border border-neutral-700 rounded-md px-4 py-3 text-gray-400">
+                  Loading categories...
+                </div>
+              ) : (
+                <select
+                  name="category"
+                  value={formData.category}
+                  onChange={handleChange}
+                  className="w-full bg-neutral-800 border border-neutral-700 rounded-md px-4 py-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  disabled={isSubmitting || categories.length === 0}
+                  required
+                >
+                  {categories.map((category) => (
+                    <option key={category.id} value={category.id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+              )}
             </div>
 
             {/* Content */}
@@ -179,7 +217,9 @@ const AskQuestionModal = ({ isOpen, onClose, onQuestionCreated }) => {
               disabled={
                 isSubmitting ||
                 !formData.title.trim() ||
-                !formData.content.trim()
+                !formData.content.trim() ||
+                !formData.category ||
+                loadingCategories
               }
               className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
             >

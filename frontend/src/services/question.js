@@ -123,4 +123,14 @@ export const questionService = {
       return handleError(error, "Failed to post answer");
     }
   },
+
+  getCategories: async () => {
+    try {
+      const response = await axios.get(`${API_URL}/categories`);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      return [];
+    }
+  },
 };
