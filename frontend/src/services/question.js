@@ -1,6 +1,6 @@
-// services/question.js
 import axios from "axios";
 import { toast } from "react-toastify";
+import { getCurrentUser } from "./authentication";
 
 const API_URL = "http://localhost:5000/api/questions";
 
@@ -19,23 +19,27 @@ const handleError = (error, defaultMessage = "An error occurred") => {
 export const questionService = {
   getQuestions: async () => {
     try {
-      const response = await axios.get(API_URL, {
-        headers: getAuthHeaders(),
-      });
+      const response = await axios.get(API_URL);
       return response.data;
     } catch (error) {
-      return handleError(error, "Failed to fetch questions");
+      const message =
+        error.response?.data?.error || "Failed to fetch questions";
+      toast.error(message);
+      throw new Error(message);
     }
   },
 
   getQuestionById: async (id) => {
     try {
-      const response = await axios.get(`${API_URL}/${id}`, {
-        headers: getAuthHeaders(),
-      });
+      const user = getCurrentUser();
+      const params = user ? { user_id: user.id } : {};
+
+      const response = await axios.get(`${API_URL}/${id}`, { params });
       return response.data;
     } catch (error) {
-      return handleError(error, "Question not found");
+      const message = error.response?.data?.error || "Question not found";
+      toast.error(message);
+      throw new Error(message);
     }
   },
 
@@ -53,33 +57,42 @@ export const questionService = {
 
   likeQuestion: async (id) => {
     try {
-      const response = await axios.post(
-        `${API_URL}/${id}/like`,
-        {},
-        {
-          headers: getAuthHeaders(),
-        }
-      );
-      toast.success("Question liked!");
+      const user = getCurrentUser();
+      if (!user) {
+        throw new Error("Please login to like questions");
+      }
+
+      const response = await axios.post(`${API_URL}/${id}/like`, {
+        user_id: user.id,
+      });
+
+      toast.success(response.data.message);
       return response.data;
     } catch (error) {
-      return handleError(error, "Failed to like question");
+      const message = error.response?.data?.error || "Failed to like question";
+      toast.error(message);
+      throw new Error(message);
     }
   },
 
   dislikeQuestion: async (id) => {
     try {
-      const response = await axios.post(
-        `${API_URL}/${id}/dislike`,
-        {},
-        {
-          headers: getAuthHeaders(),
-        }
-      );
-      toast.success("Question disliked!");
+      const user = getCurrentUser();
+      if (!user) {
+        throw new Error("Please login to dislike questions");
+      }
+
+      const response = await axios.post(`${API_URL}/${id}/dislike`, {
+        user_id: user.id,
+      });
+
+      toast.success(response.data.message);
       return response.data;
     } catch (error) {
-      return handleError(error, "Failed to dislike question");
+      const message =
+        error.response?.data?.error || "Failed to dislike question";
+      toast.error(message);
+      throw new Error(message);
     }
   },
 

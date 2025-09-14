@@ -22,11 +22,11 @@ const QuestionDetail = () => {
 
   const fetchQuestion = async () => {
     try {
+      setLoading(true);
       const data = await questionService.getQuestionById(id);
       setQuestion(data);
     } catch (err) {
-      setError("Failed to fetch question");
-      console.error("Error fetching question:", err);
+      setQuestion(null);
     } finally {
       setLoading(false);
     }
@@ -36,18 +36,14 @@ const QuestionDetail = () => {
     try {
       await questionService.likeQuestion(id);
       fetchQuestion();
-    } catch (err) {
-      console.error("Error liking question:", err);
-    }
+    } catch (err) {}
   };
 
   const handleDislike = async () => {
     try {
       await questionService.dislikeQuestion(id);
       fetchQuestion();
-    } catch (err) {
-      console.error("Error disliking question:", err);
-    }
+    } catch (err) {}
   };
 
   const handleDelete = async () => {
@@ -120,20 +116,37 @@ const QuestionDetail = () => {
           <div className="flex items-center space-x-2">
             <button
               onClick={handleLike}
-              className="flex items-center space-x-1 text-green-300 cursor-pointer bg-neutral-800 p-2 rounded-md hover:bg-neutral-700"
+              className={`flex items-center space-x-1 p-2 rounded-md ${
+                question.userVote === "like"
+                  ? "bg-green-500 text-white"
+                  : "bg-neutral-800 text-green-300 hover:bg-neutral-700"
+              } ${
+                !currentUser
+                  ? "opacity-50 cursor-not-allowed"
+                  : "cursor-pointer"
+              }`}
+              disabled={!currentUser}
+              title={!currentUser ? "Login to like" : ""}
             >
-              <span>
-                <AiFillLike className="ml-1" />
-              </span>
+              <AiFillLike />
               <span>{question.likes || 0}</span>
             </button>
+
             <button
               onClick={handleDislike}
-              className="flex items-center space-x-1 text-red-300 cursor-pointer bg-neutral-800 p-2 rounded-md hover:bg-neutral-700"
+              className={`flex items-center space-x-1 p-2 rounded-md ${
+                question.userVote === "dislike"
+                  ? "bg-red-500 text-white"
+                  : "bg-neutral-800 text-red-300 hover:bg-neutral-700"
+              } ${
+                !currentUser
+                  ? "opacity-50 cursor-not-allowed"
+                  : "cursor-pointer"
+              }`}
+              disabled={!currentUser}
+              title={!currentUser ? "Login to dislike" : ""}
             >
-              <span>
-                <AiFillDislike className="ml-1" />
-              </span>
+              <AiFillDislike />
               <span>{question.dislikes || 0}</span>
             </button>
           </div>
@@ -143,7 +156,6 @@ const QuestionDetail = () => {
             <span className="mx-2">•</span>
             <span>{new Date(question.created_at).toLocaleDateString()}</span>
           </div>
-
           <span className="bg-blue-500 text-white px-2 py-1 rounded text-xs">
             {question.category}
           </span>
