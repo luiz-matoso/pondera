@@ -14,20 +14,14 @@ Pondera é uma plataforma moderna de perguntas e respostas construída com React
 - **UI Moderna**: Interface limpa com tema escuro e animações suaves
 
 ## 🎥 Demonstração
-> Criando uma conta no Pondera e se autenticando.
 
+> Criando uma conta no Pondera e se autenticando.
 
 https://github.com/user-attachments/assets/38a83bd9-1de0-458c-bf02-79557a4a5c00
 
-
-
 > Alterando informações pessoais na aba de visualizar seu perfil.
 
-
-
 https://github.com/user-attachments/assets/245110db-04d8-44d9-a12e-cec8ee370905
-
-
 
 ## 🛠️ Stack Tecnológica
 
@@ -260,4 +254,4 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 ## 🆘 Suporte
 
-Se você tiver alguma dúvida ou problema, por favor abra uma issue no GitHub ou entre em contato com a equipe de desenvolvimento.
+Se você tiver alguma dúvida ou problema, por favor abra uma issue no GitHub ou entre em contato.
