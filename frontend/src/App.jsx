@@ -6,6 +6,7 @@ import { Bounce, ToastContainer } from "react-toastify";
 import Layout from "./components/Layout/Layout";
 import HomeQuestions from "./components/HomeQuestions/HomeQuestions";
 import QuestionDetail from "./components/QuestionDetail/QuestionDetail";
+import Profile from "./components/Profile/Profile";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<HomeQuestions />} />
             <Route path="question/:id" element={<QuestionDetail />} />
+            <Route path="profile" element={<Profile />} />
           </Route>
 
           <Route path="/login" element={<Login />} />

@@ -3,15 +3,21 @@ import { MdHome } from "react-icons/md";
 import { RiProfileFill } from "react-icons/ri";
 import { IoHelpBuoySharp } from "react-icons/io5";
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 const Layout = () => {
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState("home");
 
   const menuItems = [
-    { id: "home", icon: MdHome, label: "Home" },
-    { id: "profile", icon: RiProfileFill, label: "My Profile" },
-    { id: "help", icon: IoHelpBuoySharp, label: "Help" },
+    { id: "home", icon: MdHome, label: "Home", path: "/" },
+    {
+      id: "profile",
+      icon: RiProfileFill,
+      label: "My Profile",
+      path: "/profile",
+    },
+    { id: "help", icon: IoHelpBuoySharp, label: "Help", path: "/help" },
   ];
 
   return (
@@ -26,11 +32,12 @@ const Layout = () => {
               <div className="space-y-2 text-xl">
                 {menuItems.map((item) => {
                   const Icon = item.icon;
-                  const active = activeTab === item.id;
+                  const active = location.pathname === item.path;
 
                   return (
-                    <div
+                    <Link
                       key={item.id}
+                      to={item.path}
                       onClick={() => setActiveTab(item.id)}
                       className={`p-3 rounded cursor-pointer transition-colors text-left flex items-center ${
                         active
@@ -40,7 +47,7 @@ const Layout = () => {
                     >
                       <Icon className="mr-3" />
                       <span className={`cursor-pointer`}>{item.label}</span>
-                    </div>
+                    </Link>
                   );
                 })}
               </div>
