@@ -33,18 +33,17 @@ const Layout = () => {
 
   const handleQuestionCreated = () => {
     setIsModalOpen(false);
-
     window.location.reload();
   };
 
   return (
-    <div>
+    <div className="flex flex-col h-screen">
       <Header />
 
-      <div className="flex">
+      <div className="flex flex-1 overflow-hidden">
         {/* Sidebar Esquerda */}
-        <div className="w-1/4">
-          <div className="custom-bg-sidebar h-[calc(100vh-5rem)] p-6">
+        <div className="w-1/4 flex-shrink-0">
+          <div className="custom-bg-sidebar h-full p-6">
             <div className="ml-8 md:ml-20 lg:ml-32 xl:ml-40 mt-12 w-4/5">
               <div className="space-y-2 text-xl">
                 {menuItems.map((item) => {
@@ -71,13 +70,14 @@ const Layout = () => {
           </div>
         </div>
 
-        <div className="w-2/4 bg-[#0f0f0f] p-6">
+        {/* Conteúdo Central  */}
+        <div className="w-2/4 bg-[#0f0f0f] p-6 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
           <Outlet />
         </div>
 
         {/* Sidebar Direita */}
-        <div className="w-1/4">
-          <div className="custom-bg-sidebar h-[calc(100vh-5rem)] p-6 border-r border-gray-800">
+        <div className="w-1/4 flex-shrink-0">
+          <div className="custom-bg-sidebar h-full p-6 border-r border-gray-800 overflow-y-auto">
             <div className="space-y-2">
               <div className="p-3 text-center rounded transition-colors">
                 <button

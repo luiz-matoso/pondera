@@ -156,7 +156,7 @@ const Profile = () => {
 
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen flex items-center justify-center login-form-bg text-white">
+      <div className="min-h-screen flex items-center justify-center text-white">
         <div className="text-center">
           <h2 className="text-2xl font-semibold">Unauthorized Access</h2>
           <p className="mt-2">You need to be logged in to access this page.</p>
