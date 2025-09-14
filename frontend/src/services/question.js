@@ -133,4 +133,14 @@ export const questionService = {
       return [];
     }
   },
+
+  getStats: async () => {
+    try {
+      const response = await axios.get(`${API_URL}/stats`);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching stats:", error);
+      return { total_questions: 0, total_answers: 0 };
+    }
+  },
 };

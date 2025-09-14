@@ -3,14 +3,16 @@ import { MdHome } from "react-icons/md";
 import { RiProfileFill } from "react-icons/ri";
 import { IoHelpBuoySharp } from "react-icons/io5";
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AskQuestionModal from "../AskQuestionModal/AskQuestionModal";
 import { isAuthenticated } from "../../services/authentication";
 import { toast } from "react-toastify";
+import { questionService } from "../../services/question";
 
 const Layout = () => {
   const location = useLocation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [stats, setStats] = useState({ total_questions: 0, total_answers: 0 });
 
   const menuItems = [
     { id: "home", icon: MdHome, label: "Home", path: "/" },
@@ -23,6 +25,19 @@ const Layout = () => {
     { id: "help", icon: IoHelpBuoySharp, label: "Help", path: "/help" },
   ];
 
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const statsData = await questionService.getStats();
+        setStats(statsData);
+      } catch (error) {
+        console.error("Error fetching stats:", error);
+      }
+    };
+
+    fetchStats();
+  }, []);
+
   const handleAskQuestionClick = () => {
     if (!isAuthenticated()) {
       toast.error("Please login to ask a question");
@@ -34,6 +49,7 @@ const Layout = () => {
   const handleQuestionCreated = () => {
     setIsModalOpen(false);
     window.location.reload();
+    questionService.getStats().then(setStats);
   };
 
   return (
@@ -94,6 +110,27 @@ const Layout = () => {
                 >
                   Ask A Question
                 </button>
+              </div>
+              <div className="bg-neutral-900 border-t border-neutral-700 rounded-lg p-4 text-center mt-10">
+                <h3 className="text-white font-semibold mb-3">Total Stats</h3>
+
+                <div className="grid grid-cols-2">
+                  {/* Total Questions */}
+                  <div className="rounded p-3">
+                    <div className="text-2xl font-bold text-blue-400">
+                      {stats.total_questions.toLocaleString()}
+                    </div>
+                    <div className="text-sm text-gray-300 mt-1">Questions</div>
+                  </div>
+
+                  {/* Total Answers */}
+                  <div className="rounded p-3">
+                    <div className="text-2xl font-bold text-green-400">
+                      {stats.total_answers.toLocaleString()}
+                    </div>
+                    <div className="text-sm text-gray-300 mt-1">Answers</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

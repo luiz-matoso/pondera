@@ -8,12 +8,14 @@ import {
   deleteQuestion,
   addAnswer,
   getCategories,
+  getStats,
 } from "../controllers/questionController.js";
 
 const router = express.Router();
 
 router.get("/", getQuestions);
 router.get("/categories", getCategories);
+router.get("/stats", getStats);
 router.get("/:id", getQuestionById);
 router.post("/", createQuestion);
 router.post("/:id/like", likeQuestion);

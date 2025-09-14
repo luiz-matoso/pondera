@@ -255,3 +255,19 @@ export const getCategories = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+export const getStats = async (req, res) => {
+  try {
+    const query = `
+      SELECT 
+        (SELECT COUNT(*) FROM questions) AS total_questions,
+        (SELECT COUNT(*) FROM answers) AS total_answers
+    `;
+
+    const [stats] = await db.query(query);
+    res.json(stats[0]);
+  } catch (error) {
+    console.error("Error fetching stats:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
