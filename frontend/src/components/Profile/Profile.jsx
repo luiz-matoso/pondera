@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
 import { FaUserCircle, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
-import { updateProfile, changePassword } from "../../services/profile";
-import { getCurrentUser, isAuthenticated } from "../../services/authentication";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { authService } from "./../../services/authentication";
+import { profileService } from "./../../services/profile";
 
 const Profile = () => {
   const [formData, setFormData] = useState({
@@ -24,8 +24,8 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
 
-  const isLoggedIn = isAuthenticated();
-  const user = getCurrentUser();
+  const isLoggedIn = authService.isAuthenticated();
+  const user = authService.getCurrentUser();
 
   const initializeFormData = useCallback(() => {
     if (user && !isInitialized) {
@@ -90,7 +90,7 @@ const Profile = () => {
         return;
       }
 
-      const result = await updateProfile({
+      const result = await profileService.updateProfile({
         name: formData.name,
         email: formData.email,
       });
@@ -128,7 +128,7 @@ const Profile = () => {
     }
 
     try {
-      const result = await changePassword({
+      const result = await profileService.changePassword({
         currentPassword: formData.currentPassword,
         newPassword: formData.newPassword,
       });

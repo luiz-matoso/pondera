@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { getCurrentUser } from "./authentication";
+import { authService } from "./authentication";
 
 const API_URL = "http://localhost:5000/api/questions";
 
@@ -31,7 +31,7 @@ export const questionService = {
 
   getQuestionById: async (id) => {
     try {
-      const user = getCurrentUser();
+      const user = authService.getCurrentUser();
       const params = user ? { user_id: user.id } : {};
 
       const response = await axios.get(`${API_URL}/${id}`, { params });
@@ -56,7 +56,7 @@ export const questionService = {
 
   likeQuestion: async (id) => {
     try {
-      const user = getCurrentUser();
+      const user = authService.getCurrentUser();
       if (!user) {
         throw new Error("Please login to like questions");
       }
@@ -76,7 +76,7 @@ export const questionService = {
 
   dislikeQuestion: async (id) => {
     try {
-      const user = getCurrentUser();
+      const user = authService.getCurrentUser();
       if (!user) {
         throw new Error("Please login to dislike questions");
       }

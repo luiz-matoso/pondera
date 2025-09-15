@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { getCurrentUser } from "../../services/authentication";
 import { useNavigate } from "react-router-dom";
 import { AiFillLike } from "react-icons/ai";
 import { AiFillDislike } from "react-icons/ai";
 import { questionService } from "../../services/question";
+import { authService } from "./../../services/authentication";
 
 const HomeQuestions = () => {
   const [questions, setQuestions] = useState([]);
@@ -12,7 +12,7 @@ const HomeQuestions = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const currentUser = getCurrentUser();
+  const currentUser = authService.getCurrentUser();
 
   useEffect(() => {
     fetchQuestions();

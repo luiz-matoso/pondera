@@ -6,7 +6,7 @@ import { FaApple, FaGoogle, FaXTwitter } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { loginUser } from "../../services/authentication";
+import { authService } from "./../../services/authentication";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      await loginUser(formData);
+      await authService.loginUser(formData);
       toast.success("Login successful!");
       setTimeout(() => {
         navigate("/");

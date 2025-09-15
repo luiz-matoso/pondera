@@ -2,18 +2,14 @@ import React from "react";
 import logo from "../../assets/logo_pondera.png";
 import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
-import {
-  getCurrentUser,
-  isAuthenticated,
-  logoutUser,
-} from "../../services/authentication";
+import { authService } from "./../../services/authentication";
 
 const Header = () => {
-  const isLoggedIn = isAuthenticated();
-  const user = getCurrentUser();
+  const isLoggedIn = authService.isAuthenticated();
+  const user = authService.getCurrentUser();
 
   const handleLogout = () => {
-    logoutUser();
+    authService.logoutUser();
   };
 
   return (

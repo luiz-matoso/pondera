@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { getCurrentUser } from "../../services/authentication";
 import { useParams, useNavigate } from "react-router-dom";
-
 import { IoChevronBackCircleSharp } from "react-icons/io5";
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import { questionService } from "../../services/question";
+import { authService } from "./../../services/authentication";
 
 const QuestionDetail = () => {
   const [question, setQuestion] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [answerContent, setAnswerContent] = useState("");
-  const [currentUser] = useState(getCurrentUser());
+  const [currentUser] = useState(authService.getCurrentUser());
   const { id } = useParams();
   const navigate = useNavigate();
 

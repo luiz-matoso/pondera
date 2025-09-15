@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { FaTimes, FaPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { questionService } from "../../services/question";
-import { getCurrentUser } from "../../services/authentication";
+import { authService } from "./../../services/authentication";
 
 const AskQuestionModal = ({ isOpen, onClose, onQuestionCreated }) => {
   const [formData, setFormData] = useState({
@@ -54,7 +54,7 @@ const AskQuestionModal = ({ isOpen, onClose, onQuestionCreated }) => {
     setIsSubmitting(true);
 
     try {
-      const user = getCurrentUser();
+      const user = authService.getCurrentUser();
       if (!user) {
         toast.error("Please login to ask a question");
         return;

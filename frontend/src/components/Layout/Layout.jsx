@@ -5,9 +5,9 @@ import { IoHelpBuoySharp } from "react-icons/io5";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import AskQuestionModal from "../AskQuestionModal/AskQuestionModal";
-import { isAuthenticated } from "../../services/authentication";
 import { toast } from "react-toastify";
 import { questionService } from "../../services/question";
+import { authService } from "./../../services/authentication";
 
 const Layout = () => {
   const location = useLocation();
@@ -39,7 +39,7 @@ const Layout = () => {
   }, []);
 
   const handleAskQuestionClick = () => {
-    if (!isAuthenticated()) {
+    if (!authService.isAuthenticated()) {
       toast.error("Please login to ask a question");
       return;
     }
@@ -99,13 +99,15 @@ const Layout = () => {
                 <button
                   onClick={handleAskQuestionClick}
                   className={`px-20 py-3 rounded-sm font-black transition-colors ${
-                    isAuthenticated()
+                    authService.isAuthenticated()
                       ? "text-white bg-blue-500 cursor-pointer hover:bg-blue-600"
                       : "text-gray-400 bg-blue-500 bg-opacity-50 cursor-not-allowed"
                   }`}
-                  disabled={!isAuthenticated()}
+                  disabled={!authService.isAuthenticated()}
                   title={
-                    !isAuthenticated() ? "Please login to ask a question" : ""
+                    !authService.isAuthenticated()
+                      ? "Please login to ask a question"
+                      : ""
                   }
                 >
                   Ask A Question

@@ -8,7 +8,6 @@ import { BsCalendar2DateFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { FaLock } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { registerUser } from "./../../services/authentication";
 import { toast } from "react-toastify";
 
 const Register = () => {
@@ -35,7 +34,7 @@ const Register = () => {
     }
 
     try {
-      await registerUser(formData);
+      await authService.registerUser(formData);
       toast.success("Your account was successfully created.");
       setTimeout(() => {
         navigate("/login");
