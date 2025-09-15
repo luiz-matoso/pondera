@@ -166,7 +166,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="login-form-bg text-gray-100 font-sans p-8">
+    <div className="text-gray-100 font-sans p-8">
       <header className="bg-neutral-900 border-t border-neutral-700 px-6 py-4 rounded-lg mb-6">
         <nav className="flex space-x-6">
           <Link
