@@ -14,14 +14,12 @@ const AskQuestionModal = ({ isOpen, onClose, onQuestionCreated }) => {
   const [categories, setCategories] = useState([]);
   const [loadingCategories, setLoadingCategories] = useState(true);
 
-  // Buscar categorias do banco de dados
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const categoriesData = await questionService.getCategories();
         setCategories(categoriesData);
 
-        // Setar a primeira categoria como padrão se existir
         if (categoriesData.length > 0 && !formData.category) {
           setFormData((prev) => ({
             ...prev,
@@ -29,14 +27,7 @@ const AskQuestionModal = ({ isOpen, onClose, onQuestionCreated }) => {
           }));
         }
       } catch (error) {
-        console.error("Error loading categories:", error);
         toast.error("Failed to load categories");
-        // Categorias padrão de fallback
-        setCategories([
-          { id: 1, name: "General" },
-          { id: 2, name: "Technology" },
-          { id: 3, name: "Science" },
-        ]);
       } finally {
         setLoadingCategories(false);
       }
@@ -78,7 +69,6 @@ const AskQuestionModal = ({ isOpen, onClose, onQuestionCreated }) => {
         return;
       }
 
-      // Encontrar o nome da categoria baseado no ID
       const selectedCategory = categories.find(
         (cat) => cat.id.toString() === formData.category
       );
