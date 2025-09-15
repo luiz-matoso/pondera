@@ -14,7 +14,6 @@ export const authService = {
   registerUser: async (formData) => {
     try {
       const response = await axios.post(`${API_URL}/register`, formData);
-      toast.success("Account created successfully!");
       return response.data;
     } catch (error) {
       return handleError(error, "Failed to create account");
