@@ -102,14 +102,14 @@ const AskQuestionModal = ({ isOpen, onClose, onQuestionCreated }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-neutral-900/70 flex items-center justify-center z-50 p-4">
       <div className="bg-neutral-900 border border-neutral-700 rounded-xl w-full max-w-2xl max-h-[90vh] overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-neutral-700">
           <h2 className="text-xl font-semibold text-white">Ask a Question</h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-white transition-colors"
+            className="text-gray-400 cursor-pointer hover:text-white transition-colors"
             disabled={isSubmitting}
           >
             <FaTimes size={20} />
@@ -197,7 +197,7 @@ const AskQuestionModal = ({ isOpen, onClose, onQuestionCreated }) => {
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-gray-300 hover:text-white border border-neutral-700 rounded-md transition-colors disabled:opacity-50"
+              className="px-4 py-2 text-gray-300 hover:text-white cursor-pointer border border-neutral-700 rounded-md transition-colors disabled:opacity-50"
               disabled={isSubmitting}
             >
               Cancel
@@ -211,7 +211,7 @@ const AskQuestionModal = ({ isOpen, onClose, onQuestionCreated }) => {
                 !formData.category ||
                 loadingCategories
               }
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
             >
               {isSubmitting ? (
                 "Posting..."
