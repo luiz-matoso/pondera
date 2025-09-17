@@ -9,6 +9,7 @@ import { MdEmail } from "react-icons/md";
 import { FaLock } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { authService } from "../../services/authentication";
 
 const Register = () => {
   const navigate = useNavigate();
