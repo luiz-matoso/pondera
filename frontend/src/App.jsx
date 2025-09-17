@@ -8,6 +8,7 @@ import HomeQuestions from "./components/HomeQuestions/HomeQuestions";
 import QuestionDetail from "./components/QuestionDetail/QuestionDetail";
 import Profile from "./components/Profile/Profile";
 import About from "./pages/About/About";
+import Help from "./pages/Help/Help";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route index element={<HomeQuestions />} />
             <Route path="question/:id" element={<QuestionDetail />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="help" element={<Help />} />
           </Route>
 
           <Route path="/about" element={<About />} />
