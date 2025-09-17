@@ -20,7 +20,7 @@ const Contact = () => {
           <h1 className="text-white font-semibold text-center text-2xl">
             Contact Us
           </h1>
-          <p className="mt-2 text-zinc-400 text-center">
+          <p className="mt-8 text-zinc-400 text-center">
             Got a question? Need some help? Get in touch! We value your feedback
             and are ready to assist. Send us a message, and we'll respond
             shortly.
