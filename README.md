@@ -219,7 +219,7 @@ pondera/
 │   ├── routes/         # Rotas da API
 │   ├── db.js          # Conexão com o banco de dados
 │   ├── services/      # Lógica de negócio
-│   └── server.js      # Servidor Express
+│   └── index.js      # Servidor Express
 ├── frontend/
 │   ├── src/
 │   │   ├── components/     # Componentes React
