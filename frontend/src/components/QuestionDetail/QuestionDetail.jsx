@@ -100,8 +100,7 @@ const QuestionDetail = () => {
           onClick={goBack}
           className="text-white bg-neutral-900 mr-4 cursor-pointer px-5 py-3 rounded flex gap-2 items-center transition-colors hover:bg-neutral-800"
         >
-          <IoChevronBackCircleSharp className="text-white text-2xl" /> Back to
-          Questions
+          <IoChevronBackCircleSharp className="text-white text-2xl" />
         </button>
         <h1 className="text-2xl font-bold">Question Details</h1>
       </div>
