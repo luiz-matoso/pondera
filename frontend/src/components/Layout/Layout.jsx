@@ -87,7 +87,7 @@ const Layout = () => {
         </div>
 
         {/* Conteúdo Central  */}
-        <div className="w-2/4 bg-[#0f0f0f] p-6 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+        <div className="w-full sm:w-2/4 bg-[#0f0f0f] p-6 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
           <Outlet />
         </div>
 
