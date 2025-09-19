@@ -58,7 +58,7 @@ const Layout = () => {
 
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar Esquerda */}
-        <div className="w-1/4 flex-shrink-0">
+        <div className="hidden sm:flex w-1/4 flex-shrink-0">
           <div className="custom-bg-sidebar h-full p-6">
             <div className="ml-8 md:ml-20 lg:ml-32 xl:ml-40 mt-12 w-4/5">
               <div className="space-y-2 text-xl">
@@ -92,7 +92,7 @@ const Layout = () => {
         </div>
 
         {/* Sidebar Direita */}
-        <div className="w-1/4 flex-shrink-0">
+        <div className="hidden sm:flex w-1/4 flex-shrink-0">
           <div className="custom-bg-sidebar h-full p-6 border-r border-gray-800 overflow-y-auto">
             <div className="space-y-2">
               <div className="p-3 text-center rounded transition-colors">
