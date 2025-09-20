@@ -14,7 +14,7 @@ const Header = () => {
 
   return (
     <nav className="custom-header text-white p-6">
-      <div className="container mx-auto px-40 flex justify-between items-center h-full">
+      <div className="container mx-auto px-0 sm:px-40 flex justify-between items-center h-full">
         <div className="flex items-center space-x-8 h-full">
           <div className="flex items-center space-x-6">
             <img
@@ -27,9 +27,9 @@ const Header = () => {
             </p>
           </div>
 
-          <div className="h-5 w-px bg-zinc-800"></div>
+          <div className="hidden sm:block h-5 w-px bg-zinc-800"></div>
 
-          <div className="flex items-center space-x-8">
+          <div className="hidden sm:flex items-center  space-x-8">
             <Link
               to="/"
               className="text-white hover:text-gray-300 transition-colors"
@@ -51,7 +51,7 @@ const Header = () => {
           </div>
         </div>
 
-        <div className="flex items-center space-x-6 h-full">
+        <div className="hidden sm:flex items-center space-x-6 h-full">
           <div className="flex items-center bg-neutral-950 border border-neutral-700 rounded-md px-6 py-2">
             <input
               type="text"

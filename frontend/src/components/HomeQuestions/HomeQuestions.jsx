@@ -66,7 +66,7 @@ const HomeQuestions = () => {
 
             <div className="flex items-center justify-between mt-3">
               <div className="flex items-center text-gray-400 text-sm">
-                <span className="text-yellow-100">
+                <span className="text-yellow-100 text-nowrap sm:text-wrap">
                   {question.answer_count || 0} answers
                 </span>
                 <span className="mx-2">•</span>
@@ -78,9 +78,9 @@ const HomeQuestions = () => {
                   {question.dislikes || 0} <AiFillDislike className="ml-1" />
                 </span>
               </div>
-              <div className="text-gray-400 text-sm">
+              <div className="text-gray-400 text-sm grid sm:flex">
                 <span>By {question.author_name}</span>
-                <span className="mx-2">•</span>
+                <span className="mx-2 hidden sm:block">•</span>
                 <span>
                   {new Date(question.created_at).toLocaleDateString()}
                 </span>

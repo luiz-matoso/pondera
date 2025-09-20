@@ -81,7 +81,7 @@ const QuestionDetail = () => {
 
   if (!question) {
     return (
-      <div className="text-white">
+      <div className="text-white p-4 sm:p-6">
         <p>Question not found</p>
         <button
           onClick={goBack}
@@ -94,11 +94,11 @@ const QuestionDetail = () => {
   }
 
   return (
-    <div className="text-white">
-      <div className="flex items-center mb-6">
+    <div className="text-white p-4 sm:p-6">
+      <div className="flex flex-col sm:flex-row sm:items-center mb-6">
         <button
           onClick={goBack}
-          className="text-white bg-neutral-900 mr-4 cursor-pointer px-5 py-3 rounded flex gap-2 items-center transition-colors hover:bg-neutral-800"
+          className="text-white bg-neutral-900 mb-4 sm:mb-0 sm:mr-4 cursor-pointer px-5 py-3 rounded flex gap-2 items-center transition-colors hover:bg-neutral-800"
         >
           <IoChevronBackCircleSharp className="text-white text-2xl" />
         </button>
@@ -109,7 +109,7 @@ const QuestionDetail = () => {
         <h2 className="text-xl font-semibold mb-4">{question.title}</h2>
         <p className="text-gray-300 mb-4">{question.content}</p>
 
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-4 sm:space-y-0">
           <div className="flex items-center space-x-2">
             <button
               onClick={handleLike}
@@ -150,12 +150,14 @@ const QuestionDetail = () => {
 
           <div className="text-gray-400 text-sm">
             <span>By {question.author_name}</span>
-            <span className="mx-2">•</span>
-            <span>{new Date(question.created_at).toLocaleDateString()}</span>
+            <span className="mx-2 hidden sm:inline">•</span>
+            <span className="block sm:inline">
+              {new Date(question.created_at).toLocaleDateString()}
+            </span>
+            <span className="bg-blue-500 text-white px-2 py-1 rounded text-xs mt-2 sm:mt-0 sm:ml-2 inline-block sm:inline">
+              {question.category}
+            </span>
           </div>
-          <span className="bg-blue-500 text-white px-2 py-1 rounded text-xs">
-            {question.category}
-          </span>
         </div>
 
         {currentUser && currentUser.id === question.user_id && (
